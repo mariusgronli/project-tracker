@@ -1,0 +1,69 @@
+{% extends "tasktracker/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="backgroundimg">
+  <br>
+  <br>
+  <br>
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1>Tracker for {{project.project}}! <a
+      href="{% url 'tasktracker:updateproject' pk=project.pk %} "><i
+      class="fas fa-edit" id="editproj"></i></a></h1>
+    <hr>
+    <p class="lead">{{project.description}}</p>
+  <div class="col-lg text-center">
+    <a href="{% url 'tasktracker:report' pk=project.pk %}" class="btn btn-lg btn-info">See full report</a>
+  </div>
+  </div>
+</div>
+
+  <br>
+  <br>
+
+  <div class="container">
+    <div class="jumbotron">
+    <table class="table table-hover">
+      <thead>
+        <th>Task</th>
+        <th>Daily time</th>
+        <th>Total time</th>
+        <th>Time</th>
+        <th>Custom time</th>
+      </thead>
+      <tbody>
+        {% for task in project.task.all  %}
+        <tr>
+          <th>{{task.task}}</th>
+          <td>{{task.display_avg}}</td>
+          <td>{{task.display_total}}</td>
+          <td><a href="{% url 'tasktracker:click' pk=task.pk %}" class="btn btn-small btn-light">+</a></td>
+          <td><a href="{% url 'tasktracker:addtime' pk=task.pk %}" class="btn btn-small btn-light">Add/Sub</a></td>
+          <td><a href="{% url 'tasktracker:updatetask' pk=task.pk %}" class="btn btn-small btn-info">Edit</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br>
+    <hr>
+    <div class="col-lg text-center">
+      <a href="{% url 'tasktracker:createtask' %}" class="btn btn-lg btn-dark">New task</a>
+    </div>
+  </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+</div> <!-- end background img -->
+
+{% endblock %}

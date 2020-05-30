@@ -1,0 +1,29 @@
+{% extends "tasktracker/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="col-sm text-center customborder">
+    <h1>Change your task:</h1>
+  </div>
+  <br>
+  <br>
+  <form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <div class="row">
+      <div class="col-sm text-left">
+        <input type="submit" class="btn btn-success" value="Change">
+      </div>
+      <div class="col-sm text-right">
+        <a href="{% url 'tasktracker:deletetask' pk=taskmodel.pk %}" class="btn btn-danger">Delete task</a>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "tasktracker/base.html" %}
+{% load static %}
+
+{% block content %}
+
+  <div class="container" style="margin-top:80px;">
+  </div>
+
+  <div class="col-lg text-center">
+    <h1>Track how much time you spend on each project</h1>
+    <p class="lead">Select your project and start tracking! </p>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="container-countries" style="margin-left:20%;margin-right:20%;">
+  {% for proj in user_projects %}
+    {% if proj.color == 'red' %}
+    <div class="row">
+        <div class="col-lg">
+          <a href="{% url 'tasktracker:projectdetail' pk=proj.pk %}" class="btn btn-block btn-danger">{{proj.project}}</a>
+        </div>
+    </div>
+    <br>
+    {% elif proj.color == 'blue' %}
+    <div class="row">
+        <div class="col-lg">
+          <a href="{% url 'tasktracker:projectdetail' pk=proj.pk %}" class="btn btn-block btn-info">{{proj.project}}</a>
+        </div>
+    </div>
+    <br>
+    {% elif proj.color == 'green' %}
+    <div class="row">
+        <div class="col-lg">
+          <a href="{% url 'tasktracker:projectdetail' pk=proj.pk %}" class="btn btn-block btn-success">{{proj.project}}</a>
+        </div>
+    </div>
+    <br>
+    {% elif proj.color == 'orange' %}
+    <div class="row">
+        <div class="col-lg">
+          <a href="{% url 'tasktracker:projectdetail' pk=proj.pk %}" class="btn btn-block btn-warning text-white">{{proj.project}}</a>
+        </div>
+    </div>
+    <br>
+
+    <br>
+    {% endif %}<!-- To give spesific color for each country -->
+  {% endfor %}<!--End iteration over project model-->
+
+    <hr>
+
+  <div class="col-lg text-center">
+    <a href="{% url 'tasktracker:createproject' %} " class="btn btn-dark">Add a new project</a>
+  </div>
+
+</div> <!--end background-->
+
+
+
+{% endblock %}

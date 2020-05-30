@@ -1,0 +1,24 @@
+{% extends "tasktracker/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="col-sm text-center customborder">
+    <h1>Sign up to the project tracker:</h1>
+  </div>
+  <br>
+  <br>
+  <form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" class="btn btn-success" value="Sign up">
+  </form>
+  <br>
+  <br>
+</div>
+
+
+{% endblock %}

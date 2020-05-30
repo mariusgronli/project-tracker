@@ -1,0 +1,122 @@
+{% extends "tasktracker/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<br>
+<br>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm text-center">
+      <h1 class="customborder">{{project.project}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm text-center">
+      <p class="lead">{{project.description}}</p>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="row">
+        <div class="col-sm">
+          <h4 class="customborder2" style="padding-bottom:2px;"><i class="fas fa-user-clock" style="color:#1bca79;"></i> Total time spent on project:</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <h3>{{project.print_total}}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+
+    </div>
+    <div class="col-sm-5">
+      <div class="row">
+        <div class="col-sm">
+          <h4 class="customborder2" style="padding-bottom:2px;"><i class="fas fa-stopwatch" style="color:#2ba72f;"></i> Average daily time spent on project:</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <h3>{{project.print_avg}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm text-center">
+      <a href="{% url 'tasktracker:download' pk=project.pk %}" class="btn btn-success btn-lg">To Excel</a>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+
+
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{chart_labels|safe}},
+        datasets: [{
+            label: '# Time spent on different task in the project',
+            data: {{chart_data|safe}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+{%endblock%}
