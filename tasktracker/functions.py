@@ -68,23 +68,26 @@ def project_dataframe(obj):
     return df
 
 def format_timedelta(td):
-    days = td.days
-    hours = td.seconds//3600
-    minutes = (td.seconds//60)%60
-    ## format text
-    day_text = 'day'
-    hour_text = 'hour'
-    minute_text = 'minute'
-    if days > 1:
-        day_text='days'
-    if hours > 1:
-        hour_text = 'hours'
-    if minutes > 1:
-        minute_text = 'minutes'
-    if days == 0:
-        return '{} {} {} {}'.format(hours,hour_text,minutes,minute_text)
+    if td == None:
+        return 'No time registered'
     else:
-        return '{} {} {} {} {} {}'.format(days,day_text,hours,hour_text,minutes,minute_text)
+        days = td.days
+        hours = td.seconds//3600
+        minutes = (td.seconds//60)%60
+        ## format text
+        day_text = 'day'
+        hour_text = 'hour'
+        minute_text = 'minute'
+        if days > 1:
+            day_text='days'
+        if hours > 1:
+            hour_text = 'hours'
+        if minutes > 1:
+            minute_text = 'minutes'
+        if days == 0:
+            return '{} {} {} {}'.format(hours,hour_text,minutes,minute_text)
+        else:
+            return '{} {} {} {} {} {}'.format(days,day_text,hours,hour_text,minutes,minute_text)
 
 def format_timedelta_task(td):
     """
@@ -92,17 +95,20 @@ def format_timedelta_task(td):
     -----------------------------------------------------
     td = Obj - TimeDelta Object
     """
-    days = td.days
-    hours = td.seconds//3600
-    minutes = (td.seconds//60)%60
-    ## format text
-    day_text = 'D'
-    hour_text = 'H'
-    minute_text = 'M'
-    if days == 0:
-        return '{} h {} min '.format(hours,minutes)
+    if td == None:
+        return 'No time registered'
     else:
-        return '{} d {} h {} min '.format(days,hours,minutes)
+        days = td.days
+        hours = td.seconds//3600
+        minutes = (td.seconds//60)%60
+        ## format text
+        day_text = 'D'
+        hour_text = 'H'
+        minute_text = 'M'
+        if days == 0:
+            return '{} h {} min '.format(hours,minutes)
+        else:
+            return '{} d {} h {} min '.format(days,hours,minutes)
 
 def update_display_text_task(task_obj):
     """

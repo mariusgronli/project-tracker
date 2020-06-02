@@ -1,9 +1,12 @@
 from django.forms import ModelForm, Textarea
+from django import forms
 from django.utils.translation import gettext_lazy as _
 from tasktracker.models import ProjectModel,TaskModel
+from tasktracker.validate import validate_special_char
 
 ###### PROJECT MODEL #######
 class CreateProjectForm(ModelForm):
+    project = forms.CharField(validators=[validate_special_char])
     class Meta:
         model= ProjectModel
         fields =['project','color','description']

@@ -144,6 +144,7 @@ class AddCustomTimeView(LoginRequiredMixin,UpdateView):
         self.object = form.save(commit=True)
         self.object.add_custom()
         update_display_text_task(self.object)
+        update_total_avgtotal(self.object.project)
         return super().form_valid(form)
 
 class UpdateTaskView(LoginRequiredMixin,UpdateView):
