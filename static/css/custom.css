@@ -4,12 +4,16 @@ body html {
 }
 
 .navbar{
-  background-color:#122231!important;
+  background-color:#39444e!important;
   font-size: 1.1em;
 }
 
 .nav-link{
   margin-right: 50px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(0 0 0);
 }
 
 .backgroundimg{
